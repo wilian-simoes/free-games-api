@@ -40,7 +40,7 @@ namespace FreeGamesConsole
             jogos.ForEach(jogo => discordMessage.embeds.Add(
                 new Embed()
                 {
-                    title = jogo.effectiveDate.Year == DateTime.Now.Year ? jogo.title : jogo.title + ">>> EM BREVE <<<",
+                    title = jogo.effectiveDate.Year == DateTime.Now.Year ? jogo.title : jogo.title + " / (EM BREVE)",
                     url = "https://www.epicgames.com/store/pt-BR/p/" + jogo.urlSlug,
                     image = new Embed.Image()
                     {

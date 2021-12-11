@@ -15,9 +15,12 @@ namespace FreeGamesAPI.Controllers
             {
                 var jogos = await EpicGames.ListarJogosGratis();
                 var discordMessage = EpicGames.CriarRequest(jogos);
-                await EpicGames.PostDiscord(discordMessage);
+                bool enviado = await EpicGames.PostDiscord(discordMessage);
 
-                return Ok("Enviado com sucesso. Verifique o Discord.");
+                if (enviado)
+                    return Ok("Enviado com sucesso. Verifique o Discord.");
+                else
+                    return Ok("Mensagem não enviada.");
             }
             catch (Exception ex)
             {
