@@ -27,7 +27,7 @@ namespace FreeGamesConsole
         public static async Task<List<FreeGamesPromotions.Element>> ListarJogosGratis()
         {
             var novosJogos = await GetFreeGamesPromotions();
-            return novosJogos.data.Catalog.searchStore.elements.Where(x => x.promotions != null).ToList();
+            return novosJogos.data.Catalog.searchStore.elements.Where(x => x.promotions != null && x.price.totalPrice.discountPrice == 0).ToList();
         }
 
         public static DiscordMessage CriarRequest(List<FreeGamesPromotions.Element> jogos)
