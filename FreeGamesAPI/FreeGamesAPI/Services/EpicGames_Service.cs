@@ -1,19 +1,28 @@
-﻿using Newtonsoft.Json;
+﻿using FreeGamesAPI.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace FreeGamesConsole
+namespace FreeGamesAPI.Services
 {
-    public static class EpicGames
+    public class EpicGames_Service
     {
-        private static async Task<FreeGamesPromotions> GetFreeGamesPromotions()
+        private readonly Discord_Service _discord_service;
+
+        public EpicGames_Service(Discord_Service discordService)
         {
-            HttpClient httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://store-site-backend-static-ipv4.ak.epicgames.com/");
+            _discord_service = discordService;
+        }
+
+        private async Task<FreeGamesPromotions> GetFreeGamesPromotions()
+        {
+            HttpClient httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("https://store-site-backend-static-ipv4.ak.epicgames.com/")
+            };
 
             var response = await httpClient.GetAsync("freeGamesPromotions?locale=pt-BR&country=BR&allowCountries=BR");
             if (!response.IsSuccessStatusCode)
@@ -24,13 +33,13 @@ namespace FreeGamesConsole
             return JsonConvert.DeserializeObject<FreeGamesPromotions>(jsonResponse);
         }
 
-        public static async Task<List<FreeGamesPromotions.Element>> ListarJogosGratis()
+        private async Task<List<FreeGamesPromotions.Element>> ListarJogosGratis()
         {
             var novosJogos = await GetFreeGamesPromotions();
             return novosJogos.data.Catalog.searchStore.elements.Where(x => x.promotions != null && x.price.totalPrice.discountPrice == 0).ToList();
         }
 
-        public static DiscordMessage CriarRequest(List<FreeGamesPromotions.Element> jogos)
+        private DiscordMessage CriarRequest(List<FreeGamesPromotions.Element> jogos)
         {
             DiscordMessage discordMessage = new DiscordMessage
             {
@@ -51,19 +60,18 @@ namespace FreeGamesConsole
             return discordMessage;
         }
 
-        public static async Task<bool> PostDiscord(DiscordMessage discordMessage)
+        public async Task<string> GetFreeGamesAsync()
         {
-            var jsonDiscordMessage = JsonConvert.SerializeObject(discordMessage);
+            var jogos = await ListarJogosGratis();
+            var discordMessage = CriarRequest(jogos);
 
-            var httpContent = new StringContent(jsonDiscordMessage, Encoding.UTF8, "application/json");
+            var url_webhook = @"https://discord.com/api/webhooks/880941172770603059/EXoPt-3eyDrCrrMqHPkZbbtIxWqMRQB8oqbD1zVocfD-0p2oopcpCV5m23LTBueLD-P0";
+            bool enviado = await _discord_service.PostDiscord(discordMessage, url_webhook);
 
-            HttpClient client = new HttpClient();
-            var response = await client.PostAsync("https://discord.com/api/webhooks/880941172770603059/EXoPt-3eyDrCrrMqHPkZbbtIxWqMRQB8oqbD1zVocfD-0p2oopcpCV5m23LTBueLD-P0", httpContent);
+            if (!enviado)
+                return "Mensagem não enviada.";
 
-            if (!response.IsSuccessStatusCode)
-                return false;
-
-            return true;
+            return JsonConvert.SerializeObject(discordMessage);
         }
     }
 }

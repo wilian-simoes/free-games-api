@@ -1,15 +1,9 @@
+using FreeGamesAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FreeGamesAPI
 {
@@ -26,6 +20,10 @@ namespace FreeGamesAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // services
+            services.AddScoped<EpicGames_Service>();
+            services.AddScoped<Discord_Service>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
