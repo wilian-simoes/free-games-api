@@ -36,7 +36,32 @@ namespace FreeGamesAPI.Services
         private async Task<List<FreeGamesPromotions.Element>> ListarJogosGratis()
         {
             var novosJogos = await GetFreeGamesPromotions();
-            return novosJogos.data.Catalog.searchStore.elements.Where(x => x.promotions != null && x.price.totalPrice.discountPrice == 0).ToList();
+
+            var jogosFiltrados = novosJogos.data.Catalog.searchStore.elements.Where(x => x.promotions != null).ToList();
+
+            var jogosGratis = new List<FreeGamesPromotions.Element>();
+
+            foreach (var jogo in jogosFiltrados)
+            {
+                if (jogo.promotions.promotionalOffers != null && jogo.promotions.promotionalOffers.Count > 0)
+                {
+                    if (DateTime.Now >= jogo.promotions.promotionalOffers[0].promotionalOffers[0].startDate && DateTime.Now <= jogo.promotions.promotionalOffers[0].promotionalOffers[0].endDate)
+                        jogosGratis.Add(jogo);
+                }
+                else
+                {
+                    if (jogo.promotions.promotionalOffers != null && jogo.promotions.upcomingPromotionalOffers != null && jogo.promotions.upcomingPromotionalOffers.Count > 0)
+                    {
+                        if (DateTime.Now <= jogo.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].endDate)
+                        {
+                            jogo.title += jogo.title + $" (Disponível em {jogo.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].startDate:dd/MM/yyyy})";
+                            jogosGratis.Add(jogo);
+                        }
+                    }
+                }
+            }
+
+            return jogosGratis;
         }
 
         private DiscordMessage CriarRequest(List<FreeGamesPromotions.Element> jogos)
@@ -49,7 +74,7 @@ namespace FreeGamesAPI.Services
             jogos.ForEach(jogo => discordMessage.embeds.Add(
                 new Embed()
                 {
-                    title = jogo.effectiveDate.Year == DateTime.Now.Year ? jogo.title : jogo.title + " / (EM BREVE)",
+                    title = jogo.title,
                     url = "https://www.epicgames.com/store/pt-BR/p/" + jogo.urlSlug,
                     image = new Embed.Image()
                     {
