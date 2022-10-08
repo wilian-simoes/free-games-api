@@ -75,7 +75,7 @@ namespace FreeGamesAPI.Services
                 new Embed()
                 {
                     title = jogo.title,
-                    url = "https://www.epicgames.com/store/pt-BR/p/" + jogo.urlSlug,
+                    url = "https://www.epicgames.com/store/pt-BR/p/" + jogo.catalogNs.mappings.FirstOrDefault().pageSlug,
                     image = new Embed.Image()
                     {
                         url = jogo.keyImages[0].url.Replace(" ", "%20")
