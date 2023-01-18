@@ -1,4 +1,5 @@
 ﻿using FreeGamesAPI.Models;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace FreeGamesAPI.Services
     public class EpicGames_Service
     {
         private readonly Discord_Service _discord_service;
+        private readonly IConfiguration _config;
 
-        public EpicGames_Service(Discord_Service discordService)
+        public EpicGames_Service(Discord_Service discordService, IConfiguration config)
         {
             _discord_service = discordService;
+            _config = config;
         }
 
         private async Task<FreeGamesPromotions> GetFreeGamesPromotions()
@@ -90,8 +93,7 @@ namespace FreeGamesAPI.Services
             var jogos = await ListarJogosGratis();
             var discordMessage = CriarRequest(jogos);
 
-            var url_webhook = @"https://discord.com/api/webhooks/880941172770603059/EXoPt-3eyDrCrrMqHPkZbbtIxWqMRQB8oqbD1zVocfD-0p2oopcpCV5m23LTBueLD-P0";
-            bool enviado = await _discord_service.PostDiscord(discordMessage, url_webhook);
+            bool enviado = await _discord_service.PostDiscord(discordMessage, _config["Discord:UrlWebhook"]);
 
             if (!enviado)
                 return "Mensagem não enviada.";
