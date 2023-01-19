@@ -9,11 +9,11 @@ namespace FreeGamesAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TesteController : ControllerBase
+    public class MensagemController : ControllerBase
     {
         private readonly Discord_Service _discordService;
 
-        public TesteController(Discord_Service discordService)
+        public MensagemController(Discord_Service discordService)
         {
             _discordService = discordService;
         }
