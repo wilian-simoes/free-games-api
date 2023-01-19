@@ -48,7 +48,7 @@ namespace FreeGamesAPI.Services
             {
                 if (jogo.promotions.promotionalOffers != null && jogo.promotions.promotionalOffers.Count > 0)
                 {
-                    if (DateTime.Now >= jogo.promotions.promotionalOffers[0].promotionalOffers[0].startDate && DateTime.Now <= jogo.promotions.promotionalOffers[0].promotionalOffers[0].endDate)
+                    if (DateTime.Now.Date >= jogo.promotions.promotionalOffers[0].promotionalOffers[0].startDate.Date && DateTime.Now.Date <= jogo.promotions.promotionalOffers[0].promotionalOffers[0].endDate.Date)
                         jogosGratis.Add(jogo);
                 }
                 else
