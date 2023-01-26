@@ -40,7 +40,10 @@ namespace FreeGamesAPI.Services
         {
             var novosJogos = await GetFreeGamesPromotions();
 
-            var jogosFiltrados = novosJogos.data.Catalog.searchStore.elements.Where(x => x.promotions != null).ToList();
+            var jogosFiltrados = novosJogos.data.Catalog.searchStore.elements.Where(e => e.promotions != null && e.offerType == "BASE_GAME").ToList();
+
+            // Obs: Adicionado o filtro por discount e discountPrice desta forma pois os atributos discount e discountPrice são muitas vezes preenchidos de formas diferentes pela api da epic.
+            jogosFiltrados = jogosFiltrados.Where(j => j.price.totalPrice.originalPrice == j.price.totalPrice.discount || j.price.totalPrice.originalPrice == j.price.totalPrice.discountPrice).ToList();
 
             var jogosGratis = new List<FreeGamesPromotions.Element>();
 
