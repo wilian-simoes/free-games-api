@@ -1,9 +1,9 @@
 //using Google.Cloud.Functions.Framework;
 //using Microsoft.AspNetCore.Http;
 //using System.Threading.Tasks;
-//using FreeGamesAPI.Services;
+//using FreeGames.Api.Services;
 
-//namespace FreeGamesAPI
+//namespace FreeGames.Api
 //{
 //    // Define a class that implements the IHttpFunction interface
 //    public class CloudFunction : IHttpFunction

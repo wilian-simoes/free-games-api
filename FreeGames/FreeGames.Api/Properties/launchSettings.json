@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "FreeGamesAPI": {
+    "FreeGames.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

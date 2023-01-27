@@ -1,10 +1,10 @@
-﻿using FreeGamesAPI.Models;
+﻿using FreeGames.Api.Models;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FreeGamesAPI.Services
+namespace FreeGames.Api.Services
 {
     public class Discord_Service
     {

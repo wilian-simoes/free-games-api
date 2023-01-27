@@ -1,11 +1,11 @@
-﻿using FreeGamesAPI.Models;
-using FreeGamesAPI.Services;
+﻿using FreeGames.Api.Models;
+using FreeGames.Api.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace FreeGamesAPI.Controllers
+namespace FreeGames.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

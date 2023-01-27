@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FreeGamesAPI</RootNamespace>
+    <RootNamespace>FreeGames.Api</RootNamespace>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>ccf55f93-9185-4e77-8d28-bfaf99af2391</UserSecretsId>
   </PropertyGroup>

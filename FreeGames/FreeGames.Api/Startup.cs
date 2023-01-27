@@ -1,4 +1,4 @@
-using FreeGamesAPI.Services;
+using FreeGames.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +9,7 @@ using System.IO;
 using System.Reflection;
 using System;
 
-namespace FreeGamesAPI
+namespace FreeGames.Api
 {
     public class Startup
     {

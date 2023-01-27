@@ -1,9 +1,9 @@
-﻿using FreeGamesAPI.Services;
+﻿using FreeGames.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
-namespace FreeGamesAPI.Controllers
+namespace FreeGames.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

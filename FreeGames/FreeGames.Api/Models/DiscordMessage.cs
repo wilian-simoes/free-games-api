@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace FreeGamesAPI.Models
+namespace FreeGames.Api.Models
 {
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     public class DiscordMessage

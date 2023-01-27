@@ -1,4 +1,4 @@
-﻿using FreeGamesAPI.Models;
+﻿using FreeGames.Api.Models;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace FreeGamesAPI.Services
+namespace FreeGames.Api.Services
 {
     public class EpicGames_Service
     {
