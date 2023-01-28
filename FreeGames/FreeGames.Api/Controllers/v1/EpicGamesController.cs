@@ -1,8 +1,10 @@
 ﻿using FreeGames.Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FreeGames.Api.Controllers
+namespace FreeGames.Api.Controllers.v1
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EpicGamesController : ControllerBase

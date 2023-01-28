@@ -1,9 +1,11 @@
 ﻿using FreeGames.Api.Models;
 using FreeGames.Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FreeGames.Api.Controllers
+namespace FreeGames.Api.Controllers.v1
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MensagemController : ControllerBase
@@ -16,7 +18,7 @@ namespace FreeGames.Api.Controllers
         }
 
         [HttpPost("EnviarMensagem")]
-        public async Task<ActionResult> EnviarMensagem([FromQuery]string title, [FromQuery] string urlImagem)
+        public async Task<ActionResult> EnviarMensagem([FromQuery] string title, [FromQuery] string urlImagem)
         {
             var url_webhook = @"https://discord.com/api/webhooks/880941172770603059/EXoPt-3eyDrCrrMqHPkZbbtIxWqMRQB8oqbD1zVocfD-0p2oopcpCV5m23LTBueLD-P0";
 
@@ -35,10 +37,10 @@ namespace FreeGames.Api.Controllers
                     }
                 }
             };
-            
+
             var response = await _discordService.PostDiscord(discordMessage, url_webhook);
 
-            if(!response)
+            if (!response)
                 return BadRequest();
 
             return Ok();
