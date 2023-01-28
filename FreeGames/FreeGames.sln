@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.1.32328.378
+VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeGames.Api", "FreeGames.Api\FreeGames.Api.csproj", "{E73770B5-7F7B-4350-8EC1-0960BAC8B75A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeGames.Api", "FreeGames.Api\FreeGames.Api.csproj", "{C06E32D5-A0D6-4FFB-8255-078273D19EF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E73770B5-7F7B-4350-8EC1-0960BAC8B75A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E73770B5-7F7B-4350-8EC1-0960BAC8B75A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E73770B5-7F7B-4350-8EC1-0960BAC8B75A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E73770B5-7F7B-4350-8EC1-0960BAC8B75A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C06E32D5-A0D6-4FFB-8255-078273D19EF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C06E32D5-A0D6-4FFB-8255-078273D19EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C06E32D5-A0D6-4FFB-8255-078273D19EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C06E32D5-A0D6-4FFB-8255-078273D19EF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B15CF693-734A-4DA9-B005-DD6914D22F4F}
+		SolutionGuid = {5DEA2B6A-C9F6-4CDA-9D09-02560050D8BD}
 	EndGlobalSection
 EndGlobal

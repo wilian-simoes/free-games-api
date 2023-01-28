@@ -1,9 +1,6 @@
 ﻿using FreeGames.Api.Models;
 using FreeGames.Api.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace FreeGames.Api.Controllers
 {

@@ -1,8 +1,6 @@
 ﻿using FreeGames.Api.Models;
 using Newtonsoft.Json;
-using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FreeGames.Api.Services
 {

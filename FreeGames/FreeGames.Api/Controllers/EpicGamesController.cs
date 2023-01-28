@@ -1,7 +1,5 @@
 ﻿using FreeGames.Api.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
 
 namespace FreeGames.Api.Controllers
 {

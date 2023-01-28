@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace FreeGames.Api.Models
+﻿namespace FreeGames.Api.Models
 {
     public class FreeGamesPromotions
     {
