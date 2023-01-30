@@ -1,11 +1,13 @@
-﻿using FreeGames.Api.Models;
+﻿using FreeGames.Api.Attributes;
+using FreeGames.Api.Models;
 using FreeGames.Api.Services;
+using FreeGames.Identity.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FreeGames.Api.Controllers.v1
 {
-    [Authorize]
+    [Authorize(Roles = Roles.Admin)]
     [Route("api/[controller]")]
     [ApiController]
     public class MensagemController : ControllerBase
@@ -17,6 +19,7 @@ namespace FreeGames.Api.Controllers.v1
             _discordService = discordService;
         }
 
+        [ClaimsAuthorize(ClaimTypes.Mensagem, "Enviar")]
         [HttpPost("EnviarMensagem")]
         public async Task<ActionResult> EnviarMensagem([FromQuery] string title, [FromQuery] string urlImagem)
         {

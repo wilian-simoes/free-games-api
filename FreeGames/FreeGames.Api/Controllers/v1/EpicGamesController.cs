@@ -1,10 +1,12 @@
-﻿using FreeGames.Api.Services;
+﻿using FreeGames.Api.Attributes;
+using FreeGames.Api.Services;
+using FreeGames.Identity.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FreeGames.Api.Controllers.v1
 {
-    [Authorize]
+    [Authorize(Roles = Roles.Admin)]
     [Route("api/[controller]")]
     [ApiController]
     public class EpicGamesController : ControllerBase
@@ -16,6 +18,7 @@ namespace FreeGames.Api.Controllers.v1
             _epicGamesService = epicGamesService;
         }
 
+        [ClaimsAuthorize(ClaimTypes.Mensagem, "Enviar")]
         [HttpGet("GetFreeGames")]
         public async Task<ActionResult> GetFreeGames()
         {

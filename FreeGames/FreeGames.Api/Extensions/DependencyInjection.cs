@@ -5,23 +5,28 @@ using FreeGames.Identity.Data;
 using FreeGames.Identity.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace FreeGames.Api.Extensions
 {
     public static class DependencyInjection
     {
-        public static void RegisterServices(this IServiceCollection services)
+        public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddDbContext<DataContext>(options =>
-            //    options.UseSqlServer("ConnectionString")
-            //);
-
-            // InMemory Database
             services.AddDbContext<DataContext>(options =>
-            options.UseInMemoryDatabase("InMemoryDatabase"));
+                options.UseSqlServer(configuration.GetConnectionString("FreeGamesConnection"))
+            );
 
             services.AddDbContext<IdentityDataContext>(options =>
-                options.UseInMemoryDatabase("InMemoryDatabase"));
+                options.UseSqlServer(configuration.GetConnectionString("FreeGamesConnection"))
+            );
+
+            // InMemory Database
+            //services.AddDbContext<DataContext>(options =>
+            //options.UseInMemoryDatabase("InMemoryDatabase"));
+
+            //services.AddDbContext<IdentityDataContext>(options =>
+            //    options.UseInMemoryDatabase("InMemoryDatabase"));
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
