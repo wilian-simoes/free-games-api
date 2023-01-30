@@ -1,11 +1,8 @@
 ﻿using FreeGames.Identity.Configurations;
-using FreeGames.Identity.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Way2Commerce.Identity.PolicyRequirements;
 
 namespace FreeGames.Api.Extensions
 {
@@ -58,16 +55,6 @@ namespace FreeGames.Api.Extensions
             }).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = tokenValidationParameters;
-            });
-        }
-
-        public static void AddAuthorizationPolicies(this IServiceCollection services)
-        {
-            services.AddSingleton<IAuthorizationHandler, HorarioComercialHandler>();
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy(Policies.HorarioComercial, policy =>
-                    policy.Requirements.Add(new HorarioComercialRequirement()));
             });
         }
     }
