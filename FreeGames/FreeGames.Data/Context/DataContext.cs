@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FreeGames.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace FreeGames.Data.Context
 {
@@ -10,5 +11,7 @@ namespace FreeGames.Data.Context
         {
             base.OnModelCreating(builder);
         }
+
+        public DbSet<DiscordConfiguration> DiscordConfigurations { get; set; }
     }
 }

@@ -5,6 +5,8 @@
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>acbf46a7-9ad8-4c8b-8ee9-4441ee5af53e</UserSecretsId>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -20,6 +22,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\FreeGames.Application\FreeGames.Application.csproj" />
 	  <ProjectReference Include="..\FreeGames.Data\FreeGames.Data.csproj" />
+	  <ProjectReference Include="..\FreeGames.Domain\FreeGames.Domain.csproj" />
 	  <ProjectReference Include="..\FreeGames.Identity\FreeGames.Identity.csproj" />
 	</ItemGroup>
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FreeGames.Api.Services
 {
-    public class Discord_Service
+    public class DiscordService
     {
         public async Task<bool> PostDiscord(DiscordMessage discordMessage, string url_webhook)
         {

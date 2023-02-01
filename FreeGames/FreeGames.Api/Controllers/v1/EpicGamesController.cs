@@ -11,20 +11,26 @@ namespace FreeGames.Api.Controllers.v1
     [ApiController]
     public class EpicGamesController : ControllerBase
     {
-        private readonly EpicGames_Service _epicGamesService;
+        private readonly EpicGamesService _epicGamesService;
 
-        public EpicGamesController(EpicGames_Service epicGamesService)
+        public EpicGamesController(EpicGamesService epicGamesService)
         {
             _epicGamesService = epicGamesService;
         }
 
+        /// <summary>
+        /// Envia para o canal do discord os jogos grátis da semana.
+        /// </summary>
+        /// <returns></returns>
         [ClaimsAuthorize(ClaimTypes.Mensagem, "Enviar")]
         [HttpGet("GetFreeGames")]
         public async Task<ActionResult> GetFreeGames()
         {
             try
             {
-                var response = await _epicGamesService.GetFreeGamesAsync();
+                string userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+                var response = await _epicGamesService.GetFreeGamesAsync(userId);
                 return Ok(response);
             }
             catch (Exception ex)

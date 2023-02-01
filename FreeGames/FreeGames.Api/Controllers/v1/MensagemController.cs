@@ -1,6 +1,8 @@
 ﻿using FreeGames.Api.Attributes;
 using FreeGames.Api.Models;
 using FreeGames.Api.Services;
+using FreeGames.Domain.Interfaces.Services;
+using FreeGames.Domain.Services;
 using FreeGames.Identity.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,20 +14,29 @@ namespace FreeGames.Api.Controllers.v1
     [ApiController]
     public class MensagemController : ControllerBase
     {
-        private readonly Discord_Service _discordService;
+        private readonly DiscordService _discordService;
+        private IDiscordConfigurationService _discordConfigurationService;
 
-        public MensagemController(Discord_Service discordService)
+        public MensagemController(DiscordService discordService, IDiscordConfigurationService discordConfigurationService)
         {
             _discordService = discordService;
+            _discordConfigurationService = discordConfigurationService;
         }
 
+        /// <summary>
+        /// Envia mensagem com imagem para o canal do discord.
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="urlImagem"></param>
+        /// <returns></returns>
         [ClaimsAuthorize(ClaimTypes.Mensagem, "Enviar")]
         [HttpPost("EnviarMensagem")]
         public async Task<ActionResult> EnviarMensagem([FromQuery] string title, [FromQuery] string urlImagem)
         {
-            var url_webhook = @"https://discord.com/api/webhooks/880941172770603059/EXoPt-3eyDrCrrMqHPkZbbtIxWqMRQB8oqbD1zVocfD-0p2oopcpCV5m23LTBueLD-P0";
+            string userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            var discordConfiguration = await _discordConfigurationService.ObterPorUserIdAsync(userId);
 
-            DiscordMessage discordMessage = new DiscordMessage
+            DiscordMessage discordMessage = new()
             {
                 embeds = new List<Embed>()
                 {
@@ -41,7 +52,7 @@ namespace FreeGames.Api.Controllers.v1
                 }
             };
 
-            var response = await _discordService.PostDiscord(discordMessage, url_webhook);
+            var response = await _discordService.PostDiscord(discordMessage, discordConfiguration.UrlWebhook);
 
             if (!response)
                 return BadRequest();

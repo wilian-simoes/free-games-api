@@ -1,11 +1,14 @@
 ﻿using FreeGames.Api.Services;
 using FreeGames.Application.Interfaces.Services;
 using FreeGames.Data.Context;
+using FreeGames.Data.Repositories;
+using FreeGames.Domain.Interfaces.Repositories;
+using FreeGames.Domain.Interfaces.Services;
+using FreeGames.Domain.Services;
 using FreeGames.Identity.Data;
 using FreeGames.Identity.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace FreeGames.Api.Extensions
 {
@@ -34,8 +37,10 @@ namespace FreeGames.Api.Extensions
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IIdentityService, IdentityService>();
-            services.AddScoped<EpicGames_Service>();
-            services.AddScoped<Discord_Service>();
+            services.AddScoped<EpicGamesService>();
+            services.AddScoped<DiscordService>();
+            services.AddScoped<IDiscordConfigurationService, DiscordConfigurationService>();
+            services.AddScoped<IDiscordConfigurationRepository, DiscordConfigurationRepository>();
         }
     }
 }

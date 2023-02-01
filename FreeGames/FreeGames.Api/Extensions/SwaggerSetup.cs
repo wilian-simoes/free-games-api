@@ -1,4 +1,5 @@
 ﻿using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace FreeGames.Api.Extensions
 {
@@ -9,6 +10,10 @@ namespace FreeGames.Api.Extensions
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(options =>
             {
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
