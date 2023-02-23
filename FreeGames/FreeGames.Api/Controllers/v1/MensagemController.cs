@@ -1,8 +1,6 @@
 ﻿using FreeGames.Api.Attributes;
-using FreeGames.Api.Models;
-using FreeGames.Api.Services;
+using FreeGames.Domain.Models;
 using FreeGames.Domain.Interfaces.Services;
-using FreeGames.Domain.Services;
 using FreeGames.Identity.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +12,10 @@ namespace FreeGames.Api.Controllers.v1
     [ApiController]
     public class MensagemController : ControllerBase
     {
-        private readonly DiscordService _discordService;
+        private readonly IDiscordService _discordService;
         private IDiscordConfigurationService _discordConfigurationService;
 
-        public MensagemController(DiscordService discordService, IDiscordConfigurationService discordConfigurationService)
+        public MensagemController(IDiscordService discordService, IDiscordConfigurationService discordConfigurationService)
         {
             _discordService = discordService;
             _discordConfigurationService = discordConfigurationService;

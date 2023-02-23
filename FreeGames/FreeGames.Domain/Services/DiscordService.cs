@@ -1,10 +1,11 @@
-﻿using FreeGames.Api.Models;
+﻿using FreeGames.Domain.Interfaces.Services;
+using FreeGames.Domain.Models;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace FreeGames.Api.Services
+namespace FreeGames.Domain.Services
 {
-    public class DiscordService
+    public class DiscordService : IDiscordService
     {
         public async Task<bool> PostDiscord(DiscordMessage discordMessage, string url_webhook)
         {

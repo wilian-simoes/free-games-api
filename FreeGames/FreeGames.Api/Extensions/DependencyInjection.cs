@@ -1,5 +1,4 @@
-﻿using FreeGames.Api.Services;
-using FreeGames.Application.Interfaces.Services;
+﻿using FreeGames.Application.Interfaces.Services;
 using FreeGames.Data.Context;
 using FreeGames.Data.Repositories;
 using FreeGames.Domain.Interfaces.Repositories;
@@ -37,8 +36,8 @@ namespace FreeGames.Api.Extensions
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IIdentityService, IdentityService>();
-            services.AddScoped<EpicGamesService>();
-            services.AddScoped<DiscordService>();
+            services.AddScoped<IEpicGamesService, EpicGamesService>();
+            services.AddScoped<IDiscordService, DiscordService>();
             services.AddScoped<IDiscordConfigurationService, DiscordConfigurationService>();
             services.AddScoped<IDiscordConfigurationRepository, DiscordConfigurationRepository>();
         }

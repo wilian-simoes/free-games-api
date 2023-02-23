@@ -1,15 +1,15 @@
-﻿using FreeGames.Api.Models;
+﻿using FreeGames.Domain.Models;
 using FreeGames.Domain.Interfaces.Services;
 using Newtonsoft.Json;
 
-namespace FreeGames.Api.Services
+namespace FreeGames.Domain.Services
 {
-    public class EpicGamesService
+    public class EpicGamesService : IEpicGamesService
     {
-        private readonly DiscordService _discordService;
+        private readonly IDiscordService _discordService;
         private readonly IDiscordConfigurationService _discordConfigurationService;
 
-        public EpicGamesService(DiscordService discordService, IDiscordConfigurationService discordConfigurationService)
+        public EpicGamesService(IDiscordService discordService, IDiscordConfigurationService discordConfigurationService)
         {
             _discordService = discordService;
             _discordConfigurationService = discordConfigurationService;
@@ -27,13 +27,7 @@ namespace FreeGames.Api.Services
                 throw new Exception("Erro ao conectar-se a API da Epic Games.");
 
             var jsonResponse = await response.Content.ReadAsStringAsync();
-
             return JsonConvert.DeserializeObject<FreeGamesPromotions>(jsonResponse);
-        }
-
-        private async Task<string> AtualizarListaJogos()
-        {
-            throw new NotImplementedException();
         }
 
         private async Task<List<FreeGamesPromotions.Element>> ListarJogosGratis()
@@ -104,6 +98,18 @@ namespace FreeGames.Api.Services
                 return "Mensagem não enviada.";
 
             return JsonConvert.SerializeObject(discordMessage);
+        }
+
+        public async Task<object> ObterJsonJogosGratisAsync()
+        {
+            var jogos = await ListarJogosGratis();
+
+            return jogos.Select(j => new
+            {
+                Nome = j.title,
+                Descricao = j.description,
+                URL = $"https://store.epicgames.com/pt-BR/p/{j.catalogNs.mappings[0].pageSlug}"
+            });
         }
     }
 }

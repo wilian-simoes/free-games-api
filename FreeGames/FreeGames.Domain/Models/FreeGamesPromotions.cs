@@ -1,4 +1,4 @@
-﻿namespace FreeGames.Api.Models
+﻿namespace FreeGames.Domain.Models
 {
     public class FreeGamesPromotions
     {
