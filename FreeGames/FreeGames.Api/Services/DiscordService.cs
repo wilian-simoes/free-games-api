@@ -12,7 +12,7 @@ namespace FreeGames.Api.Services
 
             var httpContent = new StringContent(jsonDiscordMessage, Encoding.UTF8, "application/json");
 
-            HttpClient client = new HttpClient();
+            HttpClient client = new();
             var response = await client.PostAsync(url_webhook, httpContent);
 
             if (!response.IsSuccessStatusCode)

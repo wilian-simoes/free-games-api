@@ -1,6 +1,5 @@
 ﻿using FreeGames.Domain.Entities;
 using FreeGames.Domain.Interfaces.Services;
-using FreeGames.Identity.Configurations;
 using FreeGames.Identity.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

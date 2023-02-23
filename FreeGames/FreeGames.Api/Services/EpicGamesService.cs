@@ -17,7 +17,7 @@ namespace FreeGames.Api.Services
 
         private async Task<FreeGamesPromotions> GetFreeGamesPromotions()
         {
-            HttpClient httpClient = new HttpClient
+            HttpClient httpClient = new()
             {
                 BaseAddress = new Uri("https://store-site-backend-static-ipv4.ak.epicgames.com/")
             };
@@ -29,6 +29,11 @@ namespace FreeGames.Api.Services
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<FreeGamesPromotions>(jsonResponse);
+        }
+
+        private async Task<string> AtualizarListaJogos()
+        {
+            throw new NotImplementedException();
         }
 
         private async Task<List<FreeGamesPromotions.Element>> ListarJogosGratis()

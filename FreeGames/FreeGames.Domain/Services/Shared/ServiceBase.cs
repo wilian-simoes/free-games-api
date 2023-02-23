@@ -14,7 +14,7 @@ namespace FreeGames.Domain.Services.Shared
         public virtual async Task<IEnumerable<TEntity>> ObterTodosAsync() =>
             await _repositoryBase.ObterTodosAsync();
 
-        public virtual async Task<TEntity?> ObterPorIdAsync(int id) =>
+        public virtual async Task<TEntity> ObterPorIdAsync(int id) =>
             await _repositoryBase.ObterPorIdAsync(id);
 
         public virtual async Task<object> AdicionarAsync(TEntity objeto) =>
