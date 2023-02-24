@@ -14,6 +14,11 @@ namespace FreeGames.Api.Controllers.v1
         public UsuarioController(IIdentityService identityService) =>
             _identityService = identityService;
 
+        /// <summary>
+        /// Cadastro de usuário.
+        /// </summary>
+        /// <param name="usuarioCadastro"></param>
+        /// <returns></returns>
         [HttpPost("cadastro")]
         public async Task<ActionResult<UsuarioCadastroResponse>> Cadastrar(UsuarioCadastroRequest usuarioCadastro)
         {
@@ -29,6 +34,11 @@ namespace FreeGames.Api.Controllers.v1
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
+        /// <summary>
+        /// Gera o token para um usuário.
+        /// </summary>
+        /// <param name="usuarioLogin"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         public async Task<ActionResult<UsuarioCadastroResponse>> Login(UsuarioLoginRequest usuarioLogin)
         {
@@ -42,6 +52,10 @@ namespace FreeGames.Api.Controllers.v1
             return Unauthorized(resultado);
         }
 
+        /// <summary>
+        /// Gera o refresh token.
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         [HttpPost("refresh-login")]
         public async Task<ActionResult<UsuarioCadastroResponse>> RefreshLogin()

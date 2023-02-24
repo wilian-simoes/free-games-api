@@ -19,6 +19,10 @@ namespace FreeGames.Api.Controllers.v1
             _discordConfigurationService = discordConfigurationService;
         }
 
+        /// <summary>
+        /// Recupera a configuração do discord.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("GetConfiguracao")]
         public async Task<ActionResult<DiscordConfiguration>> GetConfiguracao()
         {
@@ -31,6 +35,11 @@ namespace FreeGames.Api.Controllers.v1
             return Ok(discordConfiguration);
         }
 
+        /// <summary>
+        /// Cadastra uma configuração do discord.
+        /// </summary>
+        /// <param name="urlWebhook"></param>
+        /// <returns></returns>
         [HttpPost("CadastrarConfiguracao")]
         public async Task<ActionResult<object>> CadastrarConfiguracao([Required(ErrorMessage = "urlWebhook não foi preenchida.")] string urlWebhook)
         {

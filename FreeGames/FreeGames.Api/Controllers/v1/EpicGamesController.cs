@@ -39,6 +39,10 @@ namespace FreeGames.Api.Controllers.v1
             }
         }
 
+        /// <summary>
+        /// Retorna o json com os jogos grátis da semana.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("ObterJsonJogosGratis")]
         public async Task<ActionResult> ObterJsonJogosGratis()
         {
