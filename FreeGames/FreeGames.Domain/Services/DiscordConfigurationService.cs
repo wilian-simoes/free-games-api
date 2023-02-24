@@ -16,12 +16,7 @@ namespace FreeGames.Domain.Services
 
         public async Task<DiscordConfiguration> ObterPorUserIdAsync(string userId)
         {
-            var configuracao = await _discordConfigurationRepository.ObterPorUserIdAsync(userId);
-
-            if (configuracao == null)
-                throw new Exception("Configuração não encontrada.");
-
-            return configuracao;
+            return await _discordConfigurationRepository.ObterPorUserIdAsync(userId);
         }
     }
 }
