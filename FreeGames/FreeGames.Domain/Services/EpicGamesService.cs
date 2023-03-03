@@ -8,21 +8,20 @@ namespace FreeGames.Domain.Services
     {
         private readonly IDiscordService _discordService;
         private readonly IDiscordConfigurationService _discordConfigurationService;
+        private readonly HttpClient _httpClient;
 
-        public EpicGamesService(IDiscordService discordService, IDiscordConfigurationService discordConfigurationService)
+        public EpicGamesService(IDiscordService discordService, IDiscordConfigurationService discordConfigurationService, HttpClient httpClient)
         {
             _discordService = discordService;
             _discordConfigurationService = discordConfigurationService;
+            _httpClient = httpClient;
         }
 
         private async Task<FreeGamesPromotions> GetFreeGamesPromotions()
         {
-            HttpClient httpClient = new()
-            {
-                BaseAddress = new Uri("https://store-site-backend-static-ipv4.ak.epicgames.com/")
-            };
+            _httpClient.BaseAddress = new Uri("https://store-site-backend-static-ipv4.ak.epicgames.com/");
 
-            var response = await httpClient.GetAsync("freeGamesPromotions?locale=pt-BR&country=BR&allowCountries=BR");
+            var response = await _httpClient.GetAsync("freeGamesPromotions?locale=pt-BR&country=BR&allowCountries=BR");
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Erro ao conectar-se a API da Epic Games.");
 

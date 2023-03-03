@@ -36,10 +36,11 @@ namespace FreeGames.Api.Extensions
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IIdentityService, IdentityService>();
-            services.AddScoped<IEpicGamesService, EpicGamesService>();
-            services.AddScoped<IDiscordService, DiscordService>();
             services.AddScoped<IDiscordConfigurationService, DiscordConfigurationService>();
             services.AddScoped<IDiscordConfigurationRepository, DiscordConfigurationRepository>();
+            
+            services.AddHttpClient<IEpicGamesService, EpicGamesService>();
+            services.AddHttpClient<IDiscordService, DiscordService>();
         }
     }
 }
