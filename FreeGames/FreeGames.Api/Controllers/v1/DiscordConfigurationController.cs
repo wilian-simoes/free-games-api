@@ -12,7 +12,7 @@ namespace FreeGames.Api.Controllers.v1
     [ApiController]
     public class DiscordConfigurationController : ControllerBase
     {
-        private IDiscordConfigurationService _discordConfigurationService;
+        private readonly IDiscordConfigurationService _discordConfigurationService;
 
         public DiscordConfigurationController(IDiscordConfigurationService discordConfigurationService)
         {

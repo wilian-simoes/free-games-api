@@ -17,7 +17,7 @@ namespace FreeGames.Data.Repositories.Shared
             .AsNoTracking()
             .ToListAsync();
 
-        public virtual async Task<TEntity?> ObterPorIdAsync(int id) =>
+        public virtual async Task<TEntity> ObterPorIdAsync(int id) =>
             await Context.Set<TEntity>().FindAsync(id);
 
         public virtual async Task<object> AdicionarAsync(TEntity objeto)
@@ -41,13 +41,10 @@ namespace FreeGames.Data.Repositories.Shared
 
         public virtual async Task RemoverPorIdAsync(int id)
         {
-            var objeto = await ObterPorIdAsync(id);
-            if (objeto == null)
-                throw new Exception("O registro não existe na base de dados.");
+            var objeto = await ObterPorIdAsync(id) ?? throw new Exception("O registro não existe na base de dados.");
             await RemoverAsync(objeto);
         }
 
-        public void Dispose() =>
-            Context.Dispose();
+        public void Dispose() => Context.Dispose();
     }
 }
