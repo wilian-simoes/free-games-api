@@ -19,9 +19,7 @@ namespace FreeGames.Domain.Services
 
         private async Task<FreeGamesPromotions> GetFreeGamesPromotions()
         {
-            _httpClient.BaseAddress = new Uri("https://store-site-backend-static-ipv4.ak.epicgames.com/");
-
-            var response = await _httpClient.GetAsync("freeGamesPromotions?locale=pt-BR&country=BR&allowCountries=BR");
+            var response = await _httpClient.GetAsync("https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=pt-BR&country=BR&allowCountries=BR");
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Erro ao conectar-se a API da Epic Games.");
 
