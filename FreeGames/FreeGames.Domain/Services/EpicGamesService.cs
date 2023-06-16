@@ -61,9 +61,9 @@ namespace FreeGames.Domain.Services
             return jogosGratis;
         }
 
-        private DiscordMessage CriarRequest(List<FreeGamesPromotions.Element> jogos)
+        private static DiscordMessage CriarRequest(List<FreeGamesPromotions.Element> jogos)
         {
-            DiscordMessage discordMessage = new DiscordMessage
+            DiscordMessage discordMessage = new()
             {
                 embeds = new List<Embed>()
             };
@@ -105,7 +105,8 @@ namespace FreeGames.Domain.Services
             {
                 Nome = j.title,
                 Descricao = j.description,
-                URL = $"https://store.epicgames.com/pt-BR/p/{j.catalogNs.mappings[0].pageSlug}"
+                URL = $"https://store.epicgames.com/pt-BR/p/{j.catalogNs.mappings[0].pageSlug}",
+                Imagem = j.keyImages[0].url
             });
         }
     }

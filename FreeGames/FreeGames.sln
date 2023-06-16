@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeGames.Application", "Fr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeGames.Data", "FreeGames.Data\FreeGames.Data.csproj", "{1BD77677-7907-425B-96E1-9719C45F56DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeGames.Domain", "FreeGames.Domain\FreeGames.Domain.csproj", "{71328BCF-FFB2-46FF-886C-0B6069346A82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeGames.Domain", "FreeGames.Domain\FreeGames.Domain.csproj", "{71328BCF-FFB2-46FF-886C-0B6069346A82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeGames.Test", "FreeGames.Test\FreeGames.Test.csproj", "{33706DE2-58D2-4C41-ABBB-C61994862D5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{71328BCF-FFB2-46FF-886C-0B6069346A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71328BCF-FFB2-46FF-886C-0B6069346A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71328BCF-FFB2-46FF-886C-0B6069346A82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33706DE2-58D2-4C41-ABBB-C61994862D5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33706DE2-58D2-4C41-ABBB-C61994862D5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33706DE2-58D2-4C41-ABBB-C61994862D5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33706DE2-58D2-4C41-ABBB-C61994862D5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

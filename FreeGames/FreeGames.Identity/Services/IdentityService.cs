@@ -38,7 +38,7 @@ namespace FreeGames.Identity.Services
                 await _userManager.SetLockoutEnabledAsync(identityUser, false);
 
             var usuarioCadastroResponse = new UsuarioCadastroResponse(result.Succeeded);
-            if (!result.Succeeded && result.Errors.Count() > 0)
+            if (!result.Succeeded && result.Errors.Any())
                 usuarioCadastroResponse.AdicionarErros(result.Errors.Select(r => r.Description));
 
             return usuarioCadastroResponse;
@@ -117,13 +117,14 @@ namespace FreeGames.Identity.Services
 
         private async Task<IList<Claim>> ObterClaims(IdentityUser user, bool adicionarClaimsUsuario)
         {
-            var claims = new List<Claim>();
-
-            claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Nbf, DateTime.Now.ToString()));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToString()));
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Nbf, DateTime.Now.ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToString())
+            };
 
             if (adicionarClaimsUsuario)
             {
