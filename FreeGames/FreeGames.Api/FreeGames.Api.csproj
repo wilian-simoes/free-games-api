@@ -7,9 +7,11 @@
 		<UserSecretsId>acbf46a7-9ad8-4c8b-8ee9-4441ee5af53e</UserSecretsId>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
+		<AWSProjectType>Lambda</AWSProjectType>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Amazon.Lambda.AspNetCoreServer.Hosting" Version="1.6.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.13">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
