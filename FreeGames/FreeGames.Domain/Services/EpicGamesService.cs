@@ -9,6 +9,7 @@ namespace FreeGames.Domain.Services
         private readonly IDiscordService _discordService;
         private readonly IDiscordConfigurationService _discordConfigurationService;
         private readonly HttpClient _httpClient;
+        private static readonly List<FreeGamesPromotions.Element> jogosGratisResultadosEmCache = new();
 
         public EpicGamesService(IDiscordService discordService, IDiscordConfigurationService discordConfigurationService, HttpClient httpClient)
         {
@@ -27,7 +28,8 @@ namespace FreeGames.Domain.Services
             return JsonConvert.DeserializeObject<FreeGamesPromotions>(jsonResponse);
         }
 
-        private async Task<List<FreeGamesPromotions.Element>> ListarJogosGratis()
+        [Obsolete("Utilizar o ListarJogosGratis que foi refatorado")]
+        private async Task<List<FreeGamesPromotions.Element>> ListarJogosGratis2()
         {
             var novosJogos = await GetFreeGamesPromotions();
 
@@ -59,6 +61,42 @@ namespace FreeGames.Domain.Services
             }
 
             return jogosGratis;
+        }
+
+        private async Task<List<FreeGamesPromotions.Element>> ListarJogosGratis()
+        {
+            var jogosGratisResultados = new List<FreeGamesPromotions.Element>();
+
+            if (jogosGratisResultadosEmCache.Count == 0)
+            {
+                var novosJogos = await GetFreeGamesPromotions();
+
+                // Filtra os jogos que são gratuitos para jogar
+                var jogosFiltrados = novosJogos.data.Catalog.searchStore.elements.Where(e => e.promotions != null && e.offerType == "BASE_GAME");
+
+                // Filtra os jogos que estão gratuitos agora
+                var jogosGratisAgora = jogosFiltrados.Where(jogo => jogo.promotions.promotionalOffers != null && jogo.promotions.promotionalOffers.Count > 0 &&
+                    jogo.promotions.promotionalOffers[0].promotionalOffers[0].startDate.Date <= DateTime.Now.Date &&
+                    jogo.promotions.promotionalOffers[0].promotionalOffers[0].endDate.Date >= DateTime.Now.Date);
+
+                // Filtra os jogos que serão gratuitos no futuro
+                var jogosGratisFuturos = jogosFiltrados.Where(jogo => jogo.promotions.promotionalOffers != null && jogo.promotions.upcomingPromotionalOffers != null &&
+                    jogo.promotions.upcomingPromotionalOffers.Count > 0 &&
+                    jogo.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].endDate.Date >= DateTime.Now.Date);
+
+                // Adiciona os jogos gratuitos agora à lista de resultados
+                jogosGratisResultadosEmCache.AddRange(jogosGratisAgora);
+
+                // Adiciona a data em que o jogo estará disponível
+                jogosGratisFuturos.ToList().ForEach(jogo => jogo.title += $" (Disponível em {jogo.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].startDate:dd/MM/yyyy})");
+
+                // Adiciona os jogos gratuitos no futuro à lista de resultados, com a data de lançamento
+                jogosGratisResultadosEmCache.AddRange(jogosGratisFuturos);
+            }
+
+            jogosGratisResultados = jogosGratisResultadosEmCache;
+
+            return jogosGratisResultados;
         }
 
         private static DiscordMessage CriarRequest(List<FreeGamesPromotions.Element> jogos)
